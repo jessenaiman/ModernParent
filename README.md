@@ -25,4 +25,3 @@ programming in style.
 * [Style](http://github.com/thoughtbot/guides/blob/master/style)
 =======
 OlpAdmin
-========
