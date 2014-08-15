@@ -1,0 +1,39 @@
+<%= paginate @transactions, remote: true %>
+<table class="table">
+   <tr>
+     <th>Approval</th>    
+     <th><%= sortable "transaction_time", "Date" %></th> 
+     <th>full_name </th>  
+     <th>type </th>     
+     <th>street_address </th>
+     <th>target_url </th>
+     <th>reference </th>
+     <th>riding_id </th>
+     <th>Birthday</th>
+   </tr>
+   <% @transactions.each do |transaction| %>
+   <tr>
+     <td><%= !transaction.gateway_response.nil? ? Hash.from_xml(transaction.gateway_response)["Result"]["Approved"] : "" %>
+       <br>$<%= !transaction.gateway_response.nil? ? Hash.from_xml(transaction.gateway_response)["Result"] ["FullTotal"] : "" %> 
+       <br><%= transaction.card_type %> 
+       <br><span style="color:grey;"><%= !transaction.gateway_response.nil? ? Hash.from_xml(transaction.gateway_response)["Result"]["ReturnCode"] : "" %></span>
+     </td>
+     <td><%=  transaction.transaction_time.strftime("%d-%m-%Y %H:%M") unless transaction.transaction_time.nil? %> </td>
+
+     <td><%= transaction.first_name %> <%= transaction.last_name %></td>
+     <td><%= transaction.transaction_type %> </td>     
+     <td><%= transaction.street_address %><br>
+         <%= transaction.postal_code %><br>
+         <%= transaction.city %><br>
+         <%= transaction.telephone %><br>
+       <%= transaction.email %><br><br>
+         <%= "transaction.company_name" %><br>
+         IP:<%= transaction.user_ip %>
+     </td>
+     <td><%= transaction.target_url %> </td>
+     <td><%= transaction.references %> </td>  
+     <td><%= transaction.riding_id %> </td>
+     <td><%= transaction.birthdate %> </td>
+   </tr>
+   <% end %>
+ </table>

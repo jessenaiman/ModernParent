@@ -1,6 +1,7 @@
 class CreateTransaction < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
+      t.timestamps
       t.string :prefix
       t.string :first_name
       t.string :last_name
@@ -15,7 +16,7 @@ class CreateTransaction < ActiveRecord::Migration
       t.string :card_reference
       t.string :card_type
       t.string :personal
-      t.string :comapny_name
+      t.string :company_name
       t.string :user_ip
       t.string :origin_url
       t.string :target_url
@@ -25,23 +26,15 @@ class CreateTransaction < ActiveRecord::Migration
       t.string :transaction_type
       t.string :comments
       t.boolean :complete
-      t.string :references
-      t.integer :sql_server_id
-      t.boolean :success
-      t.decimal5 :total
-      t.decimal2 :total
-      t.decimal5 :amount
-      t.decimal2 :amount
+      t.string :reference_id
+      t.decimal :total
+      t.decimal :amount
+      t.decimal :amount
       t.integer :riding_id
       t.string :return_code
-      t.integer :membership_month
-      t.integer :membership_day
-      t.integer :membership_year
       t.datetime :membership_cut_off
-      t.decimal5 :price
-      t.decimal2 :price
-      t.integer :term
-      t.user :references
+      t.decimal :price
+      t.integer :term 
     end
   end
 end

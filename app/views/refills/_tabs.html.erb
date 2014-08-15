@@ -1,0 +1,59 @@
+<ul class="accordion-tabs">
+  <li class="tab-header-and-content">
+    <%= link_to "All", transactions_path, remote: true, class: "tab-link is-active" %>
+    <div class="tab-content">
+      <%= link_to "(Export)", transactions_path(format: 'xls') %>
+      <div id="transactions_data" class="index_data"><%= render partial: 'finance_list' %></div>
+    </div>
+  </li>    
+  <li class="tab-header-and-content">
+    <%= link_to "Donations", donations_transactions_path, remote: true, class: "tab-link" %>
+    <div class="tab-content">
+      <%= link_to "(Export)", donations_transactions_path(format: 'xls') %>
+      <div id="donations_data" class="index_data"></div>
+    </div>
+  </li>
+  <li class="tab-header-and-content">
+    <%= link_to "Memberships", memberships_transactions_path, remote: true, class: "tab-link" %>
+    <div class="tab-content">
+      <%= link_to "(Export)", memberships_transactions_path(format: 'xls') %>
+        <div id="memberships_data" class="index_data"></div>
+      </div>
+  </li>
+  <li class="tab-header-and-content">
+    <%= link_to "Items", events_transactions_path, remote: true, class: "tab-link" %> 
+    <div class="tab-content">
+      <%= link_to "(Export)", events_transactions_path(format: 'xls') %>
+      <div id="events_data" class="index_data"></div>
+    </div>
+  </li>
+  <li class="tab-header-and-content">
+    <%= link_to "ABCs", transactions_path(Type: "ABC"), class: "tab-link" %> 
+    <div class="tab-content">
+      <%= link_to "(Export)", transactions_path(Type: "ABC", format: 'xls') %>
+      <div id="abcs_data" class="index_data"></div>
+    </div>
+  </li>
+</ul>
+
+<script>
+  $(document).ready(function () {
+    $('.accordion-tabs').each(function(index) {
+      $(this).children('li').first().children('a').addClass('is-active').next().addClass('is-open').show();
+    });
+
+    $('.accordion-tabs').on('click', 'li > a', function(event) {
+      if (!$(this).hasClass('is-active')) {
+        event.preventDefault();
+        var accordionTabs = $(this).closest('.accordion-tabs')
+        accordionTabs.find('.is-open').removeClass('is-open').hide();
+
+        $(this).next().toggleClass('is-open').toggle();
+        accordionTabs.find('.is-active').removeClass('is-active');
+        $(this).addClass('is-active');
+      } else {
+        event.preventDefault();
+      }
+    });
+  });
+</script>

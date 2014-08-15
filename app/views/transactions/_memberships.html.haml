@@ -1,0 +1,48 @@
+= paginate @transactions, remote: true
+%table.table.table-striped
+  %tr
+    %th Approval
+    %th= sortable "transaction_time", "Date"
+    %th full_name
+    %th type
+    %th street_address
+    %th target_url
+    %th reference
+    %th riding_id
+    %th Birthday
+  - @transactions.each do |transaction|
+    %tr
+      %td
+        = !transaction.gateway_response.nil? ? Hash.from_xml(transaction.gateway_response)["Result"]["Approved"] : ""
+        = succeed "$" do
+          %br/
+        = !transaction.total
+        %br/
+        = transaction.card_type
+        %br/
+        %span{style: "color:grey;"}= !transaction.gateway_response.nil? ? Hash.from_xml(transaction.gateway_response)["Result"]["ReturnCode"] : ""
+      %td= transaction.transaction_time.strftime("%d-%m-%Y %H:%M") unless transaction.transaction_time.nil?
+      %td
+        = transaction.first_name
+        = transaction.last_name
+      %td= transaction.transaction_type
+      %td
+        = transaction.street_address
+        %br/
+        = transaction.postal_code
+        %br/
+        = transaction.city
+        %br/
+        = transaction.telephone
+        %br/
+        = transaction.email
+        %br/
+        %br/
+        =# transaction.company_name
+        %br/
+        IP:#{transaction.user_ip}
+      %td= transaction.target_url
+      %td
+        =# transaction.reference
+      %td= transaction.riding_id
+      %td= transaction.birthdate

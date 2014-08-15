@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.1.2"
 
-gem "airbrake"
+#gem "airbrake"
 gem "bourbon", "~> 3.2.1"
 gem "coffee-rails"
 gem "delayed_job_active_record"
@@ -10,16 +10,20 @@ gem "email_validator"
 gem "flutie"
 gem "high_voltage"
 gem "jquery-rails"
+gem 'jquery-ui-rails'
 gem "neat", "~> 1.5.1"
 gem "pg"
 gem "rack-timeout"
 gem "rails", "4.1.4"
 gem "recipient_interceptor"
+gem "haml-rails"
 gem "sass-rails", "~> 4.0.3"
 gem "simple_form"
 gem "title"
 gem "uglifier"
 gem "unicorn"
+
+gem 'refills'
 
 group :development do
   gem "foreman"
@@ -57,3 +61,10 @@ gem 'kaminari'
 gem 'devise'
 gem 'doorkeeper'#, '~> 0.6.7'
 gem 'rack-cors', :require => 'rack/cors'
+
+#charting
+gem "chartkick"
+gem "groupdate"
+gem "active_median"
+
+gem 'activeadmin', github: 'activeadmin/active_admin'

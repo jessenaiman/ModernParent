@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">prefix </Data></Cell>
+        <Cell><Data ss:Type="String">first_name </Data></Cell>
+        <Cell><Data ss:Type="String">last_name </Data></Cell>
+        <Cell><Data ss:Type="String">street_address </Data></Cell>
+        <Cell><Data ss:Type="String">postal_code </Data></Cell>
+        <Cell><Data ss:Type="String">city </Data></Cell>
+        <Cell><Data ss:Type="String">telephone </Data></Cell>
+        <Cell><Data ss:Type="String">email </Data></Cell>
+        <Cell><Data ss:Type="String">card_name </Data></Cell>
+        <Cell><Data ss:Type="String">card_security </Data></Cell>
+        <Cell><Data ss:Type="String">card_expiry </Data></Cell>
+        <Cell><Data ss:Type="String">card_reference </Data></Cell>
+        <Cell><Data ss:Type="String">card_type </Data></Cell>
+        <Cell><Data ss:Type="String">personal </Data></Cell>
+        <Cell><Data ss:Type="String">company_name </Data></Cell>
+        <Cell><Data ss:Type="String">user_ip </Data></Cell>
+        <Cell><Data ss:Type="String">origin_url </Data></Cell>
+        <Cell><Data ss:Type="String">target_url </Data></Cell>
+        <Cell><Data ss:Type="String">promo_code </Data></Cell>
+        <Cell><Data ss:Type="String">gateway_response </Data></Cell>
+        <Cell><Data ss:Type="String">home_riding </Data></Cell>
+        <Cell><Data ss:Type="String">type </Data></Cell>
+        <Cell><Data ss:Type="String">comments </Data></Cell>
+        <Cell><Data ss:Type="String">complete </Data></Cell>
+        <Cell><Data ss:Type="String">reference </Data></Cell>
+        <Cell><Data ss:Type="String">success </Data></Cell>
+        <Cell><Data ss:Type="String">Amount</Data></Cell>
+        <Cell><Data ss:Type="String">Membership Cut Off </Data></Cell>
+        <Cell><Data ss:Type="String">Birthday</Data></Cell>
+        <Cell><Data ss:Type="String">Term</Data></Cell>
+        <Cell><Data ss:Type="String">Price</Data></Cell>
+        <Cell><Data ss:Type="String">Transaction Time</Data></Cell>
+        <Cell><Data ss:Type="String">riding_id </Data></Cell>
+        <Cell><Data ss:Type="String">Total</Data></Cell>
+      </Row>
+      <% @transactions.each do |transaction| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= transaction.prefix %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.first_name %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.last_name %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.street_address %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.postal_code %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.city %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.telephone %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.email %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.card_name %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.card_security %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.card_expiry %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.card_reference %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.card_type %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.personal %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= "transaction.company_name" %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.user_ip %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.origin_url %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.target_url %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.promo_code %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.gateway_response %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.home_riding %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.transaction_type %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.comments %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.complete %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= "transaction.reference" %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%=  "tricky xml parsing may be causing a timeout" %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.amount %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.membership_cut_off %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.birthdate %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.term %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.price %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.transaction_time %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.riding_id %> </Data></Cell>
+            <Cell><Data ss:Type="String"><%= transaction.total %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
