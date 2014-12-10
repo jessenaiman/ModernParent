@@ -1,38 +1,37 @@
-<div class="well">
+  <div style="display:none">
+    <%= pie_chart({"Donations" => Transaction.donations.count, "Memberships" => Transaction.memberships.count, "Events" => Transaction.events.count}) %>
   <h2>Last 30 Days</h2>
     <p>Donations: <%= Transaction.past('Donation', 30).count %> </p>
     <p>Memberships: <%= Transaction.past('Membership', 30).count %> </p>
     <p>Events: <%= Transaction.past('Item', 30).count %> </p>
-<div>
-  
-  <div class="well">
-    <%= pie_chart({"Donations" => Transaction.donations.count, "Memberships" => Transaction.memberships.count, "Events" => Transaction.events.count}) %>
-  </div>
-  
-  <div class="well">
-    <p>Over $20: <%= Transaction.under_amount(20).count %></p>
+    <%= pie_chart Transaction.donations.where.not(promo_code: "").group(:promo_code).count %>
+    <%= pie_chart Transaction.memberships.where.not(promo_code: "").group(:promo_code).count %>
+    <%= column_chart Transaction.donations.where.not(promo_code: "").group(:promo_code).sum(:total) %>
+      Event Description Time of Day (Bar chart)
+    <%= bar_chart Transaction.events.group(:description).sum(:price), height: "1900px" %>
+      Transaction Type (Sum) Bar chart
+    <%= bar_chart Transaction.group(:transaction_type).sum(:price) %>
+        <p>Over $20: <%= Transaction.under_amount(20).count %></p>
     <p>Over $100 <%= Transaction.over_amount(100).count %> </p>
-    <p>Average Donation Amount: <%= number_to_currency Transaction.donations.average(:total) %></p>
     <p> Unsolicited: <%= Transaction.unsolicited.count %> </p>
   </div>
   
- Transaction Date Line chart
- <%= line_chart Transaction.group_by_day(:created_at).count %>
- 
-  <h1>Promo Codes</h1>
-  <h2>Donations</h2>
-  <%= pie_chart Transaction.donations.where.not(promo_code: "").group(:promo_code).count %>
-  <h2>Membership</h2>
-  <%= pie_chart Transaction.memberships.where.not(promo_code: "").group(:promo_code).count %>
+  <h1>Donations Breakdown</h1>
+<%= pie_chart({"$0-20 (#{Transaction.donations.under_amount(20).count})" => Transaction.donations.under_amount(20).count, "$20-200 (#{Transaction.donations.between_amount(20, 200).count})" => Transaction.donations.between_amount(20, 200).count, "200 and Up (#{Transaction.donations.over_amount(200).count})" => Transaction.donations.over_amount(200).count}) %>
   
-  <%= column_chart Transaction.donations.where.not(promo_code: "").group(:promo_code).sum(:total) %>
-  
-  Event Description Time of Day (Bar chart)
-  <%= bar_chart Transaction.events.group(:description).sum(:price), height: "1900px" %>
-  
-  Transaction Date Time of Day (Column chart)
+  <div>
+
+    <p>Average Donation Amount: <%= number_to_currency Transaction.donations.average(:total) %></p>
+  </div>
+
+ Transaction Date Time of Day
   <%= column_chart Transaction.group_by_hour_of_day(:created_at, format: "%l %P").count %>
   
-  Transaction Type (Sum) Bar chart
-  <%= bar_chart Transaction.group(:transaction_type).sum(:price) %>
+ Transaction Date Line chart
+ <%= line_chart Transaction.group_by_day(:created_at).count %>
+
+  
+
+  
+
 

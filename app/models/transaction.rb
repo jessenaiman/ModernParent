@@ -6,7 +6,8 @@ class Transaction < ActiveRecord::Base
   scope :abcs, -> { where(transaction_type: 'ABC') }
   scope :under_amount, -> (amount) { where("total < ?", amount) }
   scope :over_amount, -> (amount) { where("total > ?", amount) }
-  scope :total_sum_by_email, ->(email) { where(email: email).sum(:total) }
+  scope :between_amount, -> (first, second) { where("total > ? AND total < ?", first, second) }
+  scope :total_sum_by_email, -> (email) { where(email: email).sum(:total) }
   scope :unsolicited, -> { where(target_url: nil) }
   scope :no_promo_codes, -> { where(promo_code: nil) }
   scope :promo_codes, -> { where.not(promo_code: "") }
@@ -58,4 +59,9 @@ class Transaction < ActiveRecord::Base
     end
   end
   
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      Transaction.create! row.to_hash
+    end
+  end
 end

@@ -1,6 +1,6 @@
-source "https://rubygems.org"
+source "http://rubygems.org"
 
-ruby "2.1.2"
+#ruby "2.1.2"
 
 #gem "airbrake"
 gem "bourbon", "~> 3.2.1"
